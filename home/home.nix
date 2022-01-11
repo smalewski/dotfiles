@@ -7,7 +7,6 @@ let
     bottom
     cachix
     dconf2nix
-    coq
     discord
     killall
     libnotify
@@ -81,5 +80,4 @@ in
     gpg.enable = true;
     ssh.enable = true;
   };
-
 }

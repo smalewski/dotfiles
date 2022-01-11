@@ -57,9 +57,6 @@ in
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
 
-  # Show the NixOS Manual on virtual console 8
-  # services.nixosManual.showManual = true;
-
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -136,6 +133,10 @@ in
 
   nix = {
     trustedUsers = [ "root" "lem" ];
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
   };
 
   # List services that you want to enable:
