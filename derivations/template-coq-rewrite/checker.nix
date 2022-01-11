@@ -4,7 +4,7 @@
 }:
 
 let
-  templateSrc = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template";
+  templateBuild = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template";
 in
 with lib; mkCoqDerivation {
   pname = "checker";
@@ -25,7 +25,7 @@ with lib; mkCoqDerivation {
   preBuild = ''
     cd checker
     patchShebangs update_plugin.sh
-    sed -i "1c ${templateSrc}" _CoqProject.in
+    sed -i "1c ${templateBuild}" _CoqProject.in
     touch metacoq-config
   '';
 

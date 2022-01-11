@@ -2,7 +2,7 @@
 , coq, equations, pcuic, safechecker, template, which, zarith }:
 
 let
-  templateSrc = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template/";
+  templateBuild = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template/";
 in
 mkCoqDerivation {
   pname = "erasure";
@@ -24,7 +24,7 @@ mkCoqDerivation {
 
   preBuild = ''
     cd erasure
-    echo "${templateSrc}" >> metacoq-config
+    echo "${templateBuild}" >> metacoq-config
     patchShebangs clean_extraction.sh
   '';
 

@@ -3,8 +3,8 @@
 }:
 
 let
-  templateSrc = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template/";
-  checkerSrc = "-I ${checker}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Checker/";
+  templateBuild = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template/";
+  checkerBuild = "-I ${checker}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Checker/";
 in
 with lib; mkCoqDerivation {
   pname = "pcuic";
@@ -24,8 +24,8 @@ with lib; mkCoqDerivation {
   extraBuildInputs = [ equations zarith template checker ];
   preBuild = ''
     cd pcuic
-    echo "${templateSrc}" >> metacoq-config
-    echo "${checkerSrc}" >> metacoq-config
+    echo "${templateBuild}" >> metacoq-config
+    echo "${checkerBuild}" >> metacoq-config
     patchShebangs clean_extraction.sh
   '';
 

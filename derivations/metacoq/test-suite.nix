@@ -2,10 +2,10 @@
 , coq, equations, erasure, pcuic, safechecker, template, which, zarith }:
 
 let
-  templateSrc = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template/";
-  pcuicSrc = "-I ${pcuic}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/PCUIC/";
-  safecheckerSrc = "-I ${safechecker}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/SafeChecker/";
-  erasureSrc = "-I ${erasure}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Erasure/";
+  templateBuild = "-I ${template}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Template/";
+  pcuicBuild = "-I ${pcuic}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/PCUIC/";
+  safecheckerBuild = "-I ${safechecker}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/SafeChecker/";
+  erasureBuild = "-I ${erasure}/lib/coq/${coq.coq-version}/user-contrib/MetaCoq/Erasure/";
 in
 mkCoqDerivation {
   pname = "test-suite";
@@ -28,14 +28,14 @@ mkCoqDerivation {
 
   preBuild = ''
     cd test-suite
-    sed -i "1c ${templateSrc}" ./_CoqProject
-    sed -i "2c ${pcuicSrc}" ./_CoqProject
-    sed -i "3c ${safecheckerSrc}" ./_CoqProject
-    sed -i "4c ${erasureSrc}" ./_CoqProject
+    sed -i "1c ${templateBuild}" ./_CoqProject
+    sed -i "2c ${pcuicBuild}" ./_CoqProject
+    sed -i "3c ${safecheckerBuild}" ./_CoqProject
+    sed -i "4c ${erasureBuild}" ./_CoqProject
     sed -i "5,7d" ./_CoqProject
-    sed -i "1c ${templateSrc}" ./plugin-demo/_CoqProject
+    sed -i "1c ${templateBuild}" ./plugin-demo/_CoqProject
     sed -i "2d" ./plugin-demo/_CoqProject
-    sed -i "1c ${templateSrc}" ./plugin-demo/_PluginProject
+    sed -i "1c ${templateBuild}" ./plugin-demo/_PluginProject
     sed -i "2d" ./plugin-demo/_PluginProject
     sed -i "1c From MetaCoq.Template Require Import Extraction." ./plugin-demo/theories/Extraction.v
   '';
