@@ -29,11 +29,7 @@ with lib; mkCoqDerivation {
     touch metacoq-config
   '';
 
-
-
   meta = {
-    homepage = "https://github.com/MetaCoq/metacoq/";
-    description = "metacoq";
-    maintainers = [];
+    homepage = "https://github.com/TheoWinterhalter/template-coq";
   };
 }

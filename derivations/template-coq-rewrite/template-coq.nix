@@ -20,4 +20,8 @@ mkCoqDerivation {
     cd template-coq
     patchShebangs update_plugin.sh
   '';
+
+  meta = {
+    homepage = "https://github.com/TheoWinterhalter/template-coq";
+  };
 }

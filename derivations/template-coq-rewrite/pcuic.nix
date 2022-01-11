@@ -30,8 +30,6 @@ with lib; mkCoqDerivation {
   '';
 
   meta = {
-    homepage = "https://github.com/MetaCoq/metacoq/";
-    description = "metacoq";
-    maintainers = [];
+    homepage = "https://github.com/TheoWinterhalter/template-coq";
   };
 }
