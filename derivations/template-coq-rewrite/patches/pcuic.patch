@@ -1,0 +1,129 @@
+diff --color -r -c pcuic.old/theories/PCUICParallelReductionConfluence.v pcuic/theories/PCUICParallelReductionConfluence.v
+*** pcuic.old/theories/PCUICParallelReductionConfluence.v	2022-01-06 12:30:56.808227810 -0300
+--- pcuic/theories/PCUICParallelReductionConfluence.v	2022-01-06 12:45:00.247759094 -0300
+***************
+*** 3,15 ****
+  Require Import ssreflect ssrbool.
+  From Coq Require Import Bool List Utf8 ZArith Lia Morphisms String
+    Sorting.Permutation.
+! From MetaCoq.Template Require Import config utils.
+  From MetaCoq.PCUIC Require Import PCUICAst PCUICAstUtils PCUICSize
+    PCUICLiftSubst PCUICSigmaCalculus PCUICUnivSubst PCUICTyping PCUICReduction
+    PCUICSubstitution PCUICReflect PCUICClosed PCUICParallelReduction
+    PCUICPattern PCUICInduction PCUICRW PCUICPredExtra.
+  
+- Require Import monad_utils.
+  Import MonadNotation.
+  
+  (* Type-valued relations. *)
+--- 3,14 ----
+  Require Import ssreflect ssrbool.
+  From Coq Require Import Bool List Utf8 ZArith Lia Morphisms String
+    Sorting.Permutation.
+! From MetaCoq.Template Require Import config monad_utils utils.
+  From MetaCoq.PCUIC Require Import PCUICAst PCUICAstUtils PCUICSize
+    PCUICLiftSubst PCUICSigmaCalculus PCUICUnivSubst PCUICTyping PCUICReduction
+    PCUICSubstitution PCUICReflect PCUICClosed PCUICParallelReduction
+    PCUICPattern PCUICInduction PCUICRW PCUICPredExtra.
+  
+  Import MonadNotation.
+  
+  (* Type-valued relations. *)
+***************
+*** 8574,8577 ****
+    split; eapply triangle; auto.
+  Qed.
+  
+! (* Print Assumptions pred1_diamond. *)
+\ No newline at end of file
+--- 8573,8576 ----
+    split; eapply triangle; auto.
+  Qed.
+  
+! (* Print Assumptions pred1_diamond. *)
+diff --color -r -c pcuic.old/theories/PCUICPredExtra.v pcuic/theories/PCUICPredExtra.v
+*** pcuic.old/theories/PCUICPredExtra.v	2022-01-06 12:30:56.809227810 -0300
+--- pcuic/theories/PCUICPredExtra.v	2022-01-06 12:44:42.623748310 -0300
+***************
+*** 2,14 ****
+  Set Warnings "-notation-overridden".
+  Require Import ssreflect ssrbool.
+  From Coq Require Import Bool List Utf8 ZArith Lia Morphisms String.
+! From MetaCoq.Template Require Import config utils.
+  From MetaCoq.PCUIC Require Import PCUICAst PCUICAstUtils PCUICSize
+    PCUICLiftSubst PCUICSigmaCalculus PCUICUnivSubst PCUICTyping PCUICReduction
+    PCUICSubstitution PCUICReflect PCUICClosed PCUICParallelReduction
+    PCUICPattern PCUICInduction PCUICRW.
+  
+- Require Import monad_utils.
+  Import MonadNotation.
+  
+  (* Type-valued relations. *)
+--- 2,13 ----
+  Set Warnings "-notation-overridden".
+  Require Import ssreflect ssrbool.
+  From Coq Require Import Bool List Utf8 ZArith Lia Morphisms String.
+! From MetaCoq.Template Require Import config monad_utils utils.
+  From MetaCoq.PCUIC Require Import PCUICAst PCUICAstUtils PCUICSize
+    PCUICLiftSubst PCUICSigmaCalculus PCUICUnivSubst PCUICTyping PCUICReduction
+    PCUICSubstitution PCUICReflect PCUICClosed PCUICParallelReduction
+    PCUICPattern PCUICInduction PCUICRW.
+  
+  Import MonadNotation.
+  
+  (* Type-valued relations. *)
+***************
+*** 803,806 ****
+        intros ? ? [? ?]. intuition eauto.
+    - intros. econstructor. all: eauto.
+      eapply PCUICWeakeningEnv.extends_lookup. all: eauto.
+! Qed.
+\ No newline at end of file
+--- 802,805 ----
+        intros ? ? [? ?]. intuition eauto.
+    - intros. econstructor. all: eauto.
+      eapply PCUICWeakeningEnv.extends_lookup. all: eauto.
+! Qed.
+diff --color -r -c pcuic.old/theories/PCUICRW.v pcuic/theories/PCUICRW.v
+*** pcuic.old/theories/PCUICRW.v	2022-01-06 12:30:56.810227811 -0300
+--- pcuic/theories/PCUICRW.v	2022-01-06 12:34:07.982352317 -0300
+***************
+*** 2,14 ****
+  Set Warnings "-notation-overridden".
+  Require Import ssreflect ssrbool.
+  From Coq Require Import Bool List Utf8 ZArith Lia Morphisms String.
+! From MetaCoq.Template Require Import config utils.
+  From MetaCoq.PCUIC Require Import PCUICAst PCUICAstUtils PCUICSize
+    PCUICLiftSubst PCUICSigmaCalculus PCUICUnivSubst PCUICTyping PCUICReduction
+    PCUICSubstitution PCUICReflect PCUICClosed PCUICParallelReduction
+    PCUICPattern PCUICInduction.
+  
+- Require Import monad_utils.
+  Import MonadNotation.
+  
+  (* Type-valued relations. *)
+--- 2,13 ----
+  Set Warnings "-notation-overridden".
+  Require Import ssreflect ssrbool.
+  From Coq Require Import Bool List Utf8 ZArith Lia Morphisms String.
+! From MetaCoq.Template Require Import config monad_utils utils.
+  From MetaCoq.PCUIC Require Import PCUICAst PCUICAstUtils PCUICSize
+    PCUICLiftSubst PCUICSigmaCalculus PCUICUnivSubst PCUICTyping PCUICReduction
+    PCUICSubstitution PCUICReflect PCUICClosed PCUICParallelReduction
+    PCUICPattern PCUICInduction.
+  
+  Import MonadNotation.
+  
+  (* Type-valued relations. *)
+***************
+*** 1739,1742 ****
+    unfold linear in *.
+    destruct linear_mask eqn:e2. 2: discriminate.
+    apply linear_mask_rev in e2. rewrite e2. auto.
+! Qed.
+\ No newline at end of file
+--- 1738,1741 ----
+    unfold linear in *.
+    destruct linear_mask eqn:e2. 2: discriminate.
+    apply linear_mask_rev in e2. rewrite e2. auto.
+! Qed.

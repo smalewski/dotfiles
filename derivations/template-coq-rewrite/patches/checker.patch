@@ -1,0 +1,18 @@
+diff --color -r -c checker.old/theories/WeakeningEnv.v checker/theories/WeakeningEnv.v
+*** checker.old/theories/WeakeningEnv.v	2022-01-07 22:07:23.909294723 -0300
+--- checker/theories/WeakeningEnv.v	2022-01-07 22:07:48.838609062 -0300
+***************
+*** 1,6 ****
+  (* Distributed under the terms of the MIT license.   *)
+  
+! From Coq Require Import Bool List Program Lia.
+  From MetaCoq.Template Require Import config utils Ast AstUtils
+       LibHypsNaming Typing.
+  Require Import ssreflect.
+--- 1,6 ----
+  (* Distributed under the terms of the MIT license.   *)
+  
+! From Coq Require Import Bool List Program Lia String.
+  From MetaCoq.Template Require Import config utils Ast AstUtils
+       LibHypsNaming Typing.
+  Require Import ssreflect.
