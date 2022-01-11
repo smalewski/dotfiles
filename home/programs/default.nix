@@ -4,4 +4,5 @@
   ./dconf
   ./git
   ./rofi
+  ./vscode
 ]
