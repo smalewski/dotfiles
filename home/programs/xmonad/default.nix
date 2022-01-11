@@ -1,4 +1,8 @@
-{ pkgs, lib, hdmiOn, dpOn, ... }:
+{ pkgs, lib,
+  hdmiOn ? false,
+  dpOn ? false,
+  cata4kOn ? false,
+  ... }:
 
 let
   extra = ''
@@ -13,6 +17,10 @@ let
 
   dpExtra = ''
     ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2-2 --mode 2560x1440
+  '';
+
+  cata4kExtra = ''
+    ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2-1 --mode 1920x1080
   '';
 
 #    ${pkgs.nitrogen}/bin/nitrogen --restore &
@@ -38,7 +46,10 @@ in
   xsession = {
     enable = true;
 
-    initExtra = extra + polybarOpts + lib.optionalString hdmiOn hdmiExtra + lib.optionalString dpOn dpExtra;
+    initExtra = extra + polybarOpts +
+                lib.optionalString hdmiOn hdmiExtra +
+                lib.optionalString dpOn dpExtra +
+                lib.optionalString cata4kOn cata4kExtra;
 
     windowManager.xmonad = {
       enable = true;

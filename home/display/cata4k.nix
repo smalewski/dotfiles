@@ -1,4 +1,4 @@
-# Configuration for the DP-2-2
+# Configuration for the DP-2-1
 { config, lib, pkgs, stdenv, ... }:
 
 let
@@ -28,7 +28,7 @@ let
 
   wm = import ../programs/xmonad/default.nix {
     inherit config pkgs lib;
-    dpOn = true;
+    cata4kOn = true;
   };
 in
 {

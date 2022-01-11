@@ -31,8 +31,6 @@ let
 
   wm = import ../programs/xmonad/default.nix {
     inherit config pkgs lib;
-    hdmiOn = false;
-    dpOn = false;
   };
 in
 {
