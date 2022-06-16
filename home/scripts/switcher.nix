@@ -12,10 +12,13 @@ in
       echo "Switching to HM config for HDMI display"
       home-manager -f /home/lem/dotfiles/home/display/hdmi.nix switch
     elif [[ $monitors == *"DP-2-2"* ]]; then
-      echo "Switching to HM config for DP display"
+      echo "Switching to HM config for HOME display"
+      home-manager -f /home/lem/dotfiles/home/display/t27p-20.nix switch
+    elif [[ $monitors == *"xxDP-1"* ]]; then
+      echo "Switching to HM config for DCC display"
       home-manager -f /home/lem/dotfiles/home/display/t27p-20.nix switch
     elif [[ $monitors == *"eDP"* ]]; then
-      echo "Switching to HM config for eDP laptop display"
+      echo "Switching to HM config for laptop display"
       echo $monitors
       home-manager -f /home/lem/dotfiles/home/display/edp.nix switch
     else

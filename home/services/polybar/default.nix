@@ -1,13 +1,11 @@
 { mainBar, openCalendar, config, pkgs, ... }:
 
 let
-  browser = "${pkgs.firefox-beta-bin}/bin/firefox";
-
   xdgUtils = pkgs.xdg_utils.overrideAttrs (
     old: {
-      nativeBuildInputs = old.nativeBuildInputs or [] ++ [ pkgs.makeWrapper ];
+      nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ pkgs.makeWrapper ];
       postInstall = old.postInstall + "\n" + ''
-        wrapProgram $out/bin/xdg-open --suffix PATH : /run/current-system/sw/bin --suffix BROWSER : ${browser}
+        wrapProgram $out/bin/xdg-open --suffix PATH : /run/current-system/sw/bin
       '';
     }
   );
@@ -15,22 +13,22 @@ let
   openGithub = "${xdgUtils}/bin/xdg-open https\\://github.com/notifications";
 
   mypolybar = pkgs.polybar.override {
-    alsaSupport   = true;
+    alsaSupport = true;
     githubSupport = true;
-    mpdSupport    = true;
-    pulseSupport  = true;
+    mpdSupport = true;
+    pulseSupport = true;
   };
 
   # theme adapted from: https://github.com/adi1090x/polybar-themes#-polybar-5
-  bars   = builtins.readFile ./bars.ini;
+  bars = builtins.readFile ./bars.ini;
   colors = builtins.readFile ./colors.ini;
-  mods1  = builtins.readFile ./modules.ini;
-  mods2  = builtins.readFile ./user_modules.ini;
+  mods1 = builtins.readFile ./modules.ini;
+  mods2 = builtins.readFile ./user_modules.ini;
 
-  bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix {};
-  monitorScript   = pkgs.callPackage ./scripts/monitor.nix {};
-  mprisScript     = pkgs.callPackage ./scripts/mpris.nix {};
-  networkScript   = pkgs.callPackage ./scripts/network.nix {};
+  bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix { };
+  monitorScript = pkgs.callPackage ./scripts/monitor.nix { };
+  mprisScript = pkgs.callPackage ./scripts/mpris.nix { };
+  networkScript = pkgs.callPackage ./scripts/network.nix { };
 
   bctl = ''
     [module/bctl]
@@ -61,7 +59,7 @@ let
     exec = ${mprisScript}/bin/mpris
     tail = true
 
-    label-maxlen = 60
+    label-maxlen = 50
 
     interval = 2
     format =   <label>
@@ -74,6 +72,7 @@ let
     exec = ${pkgs.xmonad-log}/bin/xmonad-log
 
     tail = true
+    label-maxlen = 210
   '';
 
   customMods = mainBar + bctl + cal + github + mpris + xmonad;

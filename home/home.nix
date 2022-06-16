@@ -6,20 +6,47 @@ let
     arandr
     bottom
     cachix
+    cozy
     dconf2nix
-    discord
-    killall
     libnotify
+    pandoc
     okular
-    pavucontrol
+    rclone
+    sqlite
+    xclip
+    zathura
+
+    # Communications
+    discord
+    thunderbird
+    zulip
+
+    # Games
+    minecraft
+
+    #Langs
+    agda
+    gcc
+    rnix-lsp
+
+    # Media
+    ncmpcpp
+    soulseekqt
+    transmission-qt
+    vlc
+
+    # Music
+    carla
+    qsynth
+    qsampler
+
+    # Volume
     pasystray
     pulsemixer
-    rnix-lsp
-    spotify
-    thunderbird
-    vlc
-    xclip
-    zulip
+    pavucontrol
+
+    # Research
+    zotero
   ];
 
   gitPkgs = with pkgs.gitAndTools; [
@@ -30,7 +57,7 @@ let
   ];
 
   polybarPkgs = with pkgs; [
-    font-awesome-ttf      # awesome fonts
+    font-awesome          # awesome fonts
     material-design-icons # fonts with glyphs
   ];
 
@@ -75,6 +102,15 @@ in
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    emacs = {
+      enable = true;
+      extraPackages = epkgs: (with epkgs; [
+        pdf-tools
+        org-pdftools
+        vterm
+      ]);
     };
 
     gpg.enable = true;

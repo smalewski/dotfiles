@@ -9,11 +9,13 @@ let
   };
   callPackage = pkgs.lib.callPackageWith (pkgs // deps // self);
   self = {
+    metacoq = {
       template = callPackage ./template-coq.nix {};
       pcuic = callPackage ./pcuic.nix {};
       safechecker = callPackage ./safechecker.nix {};
       erasure = callPackage ./erasure.nix {};
       translations = callPackage ./translations.nix {};
       test-suite = callPackage ./test-suite.nix {};
+    };
   };
 in self

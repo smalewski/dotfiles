@@ -4,7 +4,6 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      background_opacity = 0.8;
       bell = {
         animation = "EaseOutExpo";
         duration = 5;
@@ -17,11 +16,12 @@
         };
       };
       font = {
-        size = 10;
+        size = 8;
       };
       selection.save_to_clipboard = true;
       shell.program = "${pkgs.zsh}/bin/zsh";
       window = {
+        opacity = 0.8;
         decorations = "full";
         padding = {
           x = 5;

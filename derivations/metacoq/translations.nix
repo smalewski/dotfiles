@@ -1,5 +1,5 @@
 { lib, mkCoqDerivation, version ? null
-, coq, equations, template, which }:
+, coq, equations, metacoq, which }:
 
 mkCoqDerivation {
   pname = "translations";
@@ -17,7 +17,7 @@ mkCoqDerivation {
   mlPlugin = true;
 
   nativeBuildInputs = [ which ];
-  extraBuildInputs = [ equations template ];
+  extraBuildInputs = [ equations metacoq.template ];
 
   preBuild = ''
     cd translations

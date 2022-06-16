@@ -27,7 +27,7 @@ let
   polybarOpts = ''
     ${pkgs.pasystray}/bin/pasystray &
     ${pkgs.blueman}/bin/blueman-applet &
-    ${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator &
+    ${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator &
   '';
 
 in

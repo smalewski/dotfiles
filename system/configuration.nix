@@ -13,6 +13,7 @@ let
   };
 
   myfonts = pkgs.callPackage fonts/default.nix { inherit pkgs; };
+
 in
 {
   imports =
@@ -20,12 +21,12 @@ in
       ./hardware-configuration.nix
       ./wm/xmonad.nix
       ./cachix.nix
+      ./sound.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
 
   # Set your time zone.
   time.timeZone = "America/Santiago";
@@ -40,6 +41,13 @@ in
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp4s0.useDHCP = true;
+
+
+    # Firewall
+    firewall.allowedTCPPorts =
+      [ 51337 # transmission
+        58429 58430 # soulseek
+      ];
   };
 
   # Configure network proxy if necessary
@@ -58,12 +66,16 @@ in
   services.printing.drivers = [ pkgs.hplip ];
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  #sound.enable = true;
+  #hardware.pulseaudio = {
+    #enable = true;
+    #extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1"; # Needed by mpd
+  #};
 
   fonts.fonts = with pkgs; [
       customFonts
-      font-awesome-ttf
+      font-awesome
+      fira-code
       myfonts.icomoon-feather
   ];
 
@@ -71,12 +83,15 @@ in
   users.mutableUsers = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.lem = {
-    hashedPassword = "$6$IwtW7uYFu3io0RPy$Yik.cQuhPyemTgT/9SWCUaRtCFssE6uUXakHXrhE5pOqmoUz3Bm3sjcwDxzzz9KTnw0ftt4fp61l4qqZ/m6Ll.";
-    isNormalUser = true;
-    extraGroups = [ "wheel"  # Enable ‘sudo’ for the user.
-                    "networkmanager"
-                  ];
+  users.users = {
+    lem = {
+      hashedPassword = "$6$IwtW7uYFu3io0RPy$Yik.cQuhPyemTgT/9SWCUaRtCFssE6uUXakHXrhE5pOqmoUz3Bm3sjcwDxzzz9KTnw0ftt4fp61l4qqZ/m6Ll.";
+      isNormalUser = true;
+      extraGroups = [ "wheel"  # Enable ‘sudo’ for the user.
+                      "networkmanager"
+                      "mpd"
+                    ];
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -84,14 +99,17 @@ in
   environment.systemPackages = with pkgs; [
     alacritty
     autorandr
-    emacs
+    cmake
+    ispell
     fd
-    firefox
     fzf
     git
     gnupg
     nix-prefetch-github
+    nixpkgs-fmt
     pass
+    pinentry
+    pinentry-curses
     ripgrep
     rofi
     thefuck
@@ -103,14 +121,31 @@ in
     TERM = [ "alacritty" ];
   };
 
+  services.mpd = {
+    enable = true;
+    user = "lem";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "PipeWire"
+      }
+    '';
+  };
+
+  systemd.services.mpd.environment = {
+      XDG_RUNTIME_DIR = "/run/user/1000";
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  services.pcscd.enable = true;
   programs = {
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "curses";
+      enableSSHSupport = true;
+    };
     zsh = {
       enable = true;
       enableCompletion = true;
