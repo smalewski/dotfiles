@@ -51,24 +51,24 @@ let
 
   gitPkgs = with pkgs.gitAndTools; [
     diff-so-fancy # git diff with colors
-    git-crypt     # git files encryption
-    hub           # github command-line client
-    tig           # diff and commit view
+    git-crypt # git files encryption
+    hub # github command-line client
+    tig # diff and commit view
   ];
 
   polybarPkgs = with pkgs; [
-    font-awesome          # awesome fonts
+    font-awesome # awesome fonts
     material-design-icons # fonts with glyphs
   ];
 
   xmonadPkgs = with pkgs; [
-   # networkmanager_dmenu   # networkmanager on dmenu
-    networkmanagerapplet   # networkmanager applet
-  # nitrogen               # wallpaper manager
-    xcape                  # keymaps modifier
-    xorg.xkbcomp           # keymaps modifier
-    xorg.xmodmap           # keymaps modifier
-    xorg.xrandr            # display manager (X Resize and Rotate protocol)
+    # networkmanager_dmenu   # networkmanager on dmenu
+    networkmanagerapplet # networkmanager applet
+    # nitrogen               # wallpaper manager
+    xcape # keymaps modifier
+    xorg.xkbcomp # keymaps modifier
+    xorg.xmodmap # keymaps modifier
+    xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
 
   scripts = pkgs.callPackage ./scripts/default.nix { inherit config pkgs; };
@@ -80,7 +80,7 @@ in
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  imports = (import ./programs) ++ (import ./services) ++ [(import ./themes)];
+  imports = (import ./programs) ++ (import ./services) ++ [ (import ./themes) ];
 
   home = {
     username = "lem";

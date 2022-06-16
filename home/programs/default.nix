@@ -2,6 +2,7 @@
   ./alacritty
   ./autorandr
   ./dconf
+  ./firefox
   ./git
   ./rofi
   ./vscode
