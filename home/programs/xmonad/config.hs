@@ -472,24 +472,23 @@ projects =
             }
   , Project { projectName      = ossWs
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do replicateM_ 2 (spawn myTerminal)
-                                           spawn $ myTerminal <> " -e home-manager edit"
+            , projectStartHook = Nothing
             }
   , Project { projectName      = devWs
-            , projectDirectory = "~/workspace/trading"
-            , projectStartHook = Just . replicateM_ 8 $ spawn myTerminal
+            , projectDirectory = "~/research"
+            , projectStartHook = Just $ spawn myTerminal
             }
   , Project { projectName      = wrkWs
             , projectDirectory = "~/"
-            , projectStartHook = Just $ spawn "firefox -P 'demo'" -- -no-remote"
+            , projectStartHook = Nothing
             }
   , Project { projectName      = sysWs
-            , projectDirectory = "/etc/nixos/"
-            , projectStartHook = Just . spawn $ myTerminal <> " -e sudo su"
+            , projectDirectory = "~/dotfiles"
+            , projectStartHook = Just . spawn $ "code ."
             }
   , Project { projectName      = etcWs
-            , projectDirectory = "~/workspace"
-            , projectStartHook = Just . spawn $ myTerminal
+            , projectDirectory = "~/"
+            , projectStartHook = Nothing
             }
   , Project { projectName      = comWs
             , projectDirectory = "~/"
