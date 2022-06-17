@@ -41,9 +41,11 @@ let
     qsampler
 
     # Volume
+    alsa-utils
     pasystray
-    pulsemixer
     pavucontrol
+    playerctl
+    pulsemixer
 
     # Research
     zotero
