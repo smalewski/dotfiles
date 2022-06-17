@@ -17,7 +17,8 @@ let
 in
 {
   imports =
-    [ <nixos-hardware/lenovo/thinkpad/t460>
+    [
+      <nixos-hardware/lenovo/thinkpad/t460>
       ./hardware-configuration.nix
       ./wm/xmonad.nix
       ./cachix.nix
@@ -33,7 +34,7 @@ in
 
   networking = {
     hostName = "lembook-T460"; # Define your hostname.
-    networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
+    networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -45,8 +46,10 @@ in
 
     # Firewall
     firewall.allowedTCPPorts =
-      [ 51337 # transmission
-        58429 58430 # soulseek
+      [
+        51337 # transmission
+        58429
+        58430 # soulseek
       ];
   };
 
@@ -68,15 +71,15 @@ in
   # Enable sound.
   #sound.enable = true;
   #hardware.pulseaudio = {
-    #enable = true;
-    #extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1"; # Needed by mpd
+  #enable = true;
+  #extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1"; # Needed by mpd
   #};
 
   fonts.fonts = with pkgs; [
-      customFonts
-      font-awesome
-      fira-code
-      myfonts.icomoon-feather
+    customFonts
+    font-awesome
+    fira-code
+    myfonts.icomoon-feather
   ];
 
   users.defaultUserShell = pkgs.zsh;
@@ -87,10 +90,11 @@ in
     lem = {
       hashedPassword = "$6$IwtW7uYFu3io0RPy$Yik.cQuhPyemTgT/9SWCUaRtCFssE6uUXakHXrhE5pOqmoUz3Bm3sjcwDxzzz9KTnw0ftt4fp61l4qqZ/m6Ll.";
       isNormalUser = true;
-      extraGroups = [ "wheel"  # Enable ‘sudo’ for the user.
-                      "networkmanager"
-                      "mpd"
-                    ];
+      extraGroups = [
+        "wheel" # Enable ‘sudo’ for the user.
+        "networkmanager"
+        "mpd"
+      ];
     };
   };
 
@@ -133,7 +137,7 @@ in
   };
 
   systemd.services.mpd.environment = {
-      XDG_RUNTIME_DIR = "/run/user/1000";
+    XDG_RUNTIME_DIR = "/run/user/1000";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -153,14 +157,15 @@ in
       syntaxHighlighting.enable = true;
       ohMyZsh = {
         enable = true;
-        plugins = [ "common-aliases"
-                    "fzf"
-                    "git"
-                    "gitfast"
-                    "history"
-                    "sudo"
-                    "thefuck"
-                  ];
+        plugins = [
+          "common-aliases"
+          "fzf"
+          "git"
+          "gitfast"
+          "history"
+          "sudo"
+          "thefuck"
+        ];
         theme = "half-life";
       };
     };
