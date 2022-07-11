@@ -231,6 +231,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
     , key "Logout (quit XMonad)"  (modm .|. shiftMask, xK_q ) $ io exitSuccess
     , key "Restart XMonad"        (modm              , xK_q ) $ spawn "xmonad --recompile; xmonad --restart"
     , key "Capture entire screen" (modm          , xK_Print ) $ spawn "flameshot full -p ~/Pictures/flameshot/"
+    , key "Monitor layout (Rofi)" (0       , xF86XK_Display ) $ spawn "rofi-monitor-layout"
     ] ^++^
   keySet "Windows"
     [ key "Close focused"   (modm              , xK_BackSpace) kill
@@ -500,7 +501,7 @@ projects =
 projectsTheme :: XPConfig
 projectsTheme = amberXPConfig
   { bgHLight = "#002b36"
-  , font     = "xft:Bitstream Vera Sans Mono:size=8:antialias=true"
+  , font     = "xft:Iosevka:size=8:antialias=true"
   , height   = 50
   , position = CenteredAt 0.5 0.5
   }
