@@ -9,7 +9,6 @@ let
     cozy
     dconf2nix
     libnotify
-    pandoc
     okular
     rclone
     sqlite
@@ -25,7 +24,7 @@ let
     minecraft
 
     #Langs
-    agda
+    (agda.withPackages (p: [ p.standard-library ]))
     gcc
     rnix-lsp
 
@@ -49,6 +48,8 @@ let
 
     # Research
     zotero
+    texlive.combined.scheme-full
+    pandoc
   ];
 
   gitPkgs = with pkgs.gitAndTools; [
@@ -56,11 +57,6 @@ let
     git-crypt # git files encryption
     hub # github command-line client
     tig # diff and commit view
-  ];
-
-  polybarPkgs = with pkgs; [
-    font-awesome # awesome fonts
-    material-design-icons # fonts with glyphs
   ];
 
   xmonadPkgs = with pkgs; [
@@ -73,7 +69,9 @@ let
     xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
 
-  scripts = pkgs.callPackage ./scripts/default.nix { inherit config pkgs; };
+  scripts = pkgs.callPackage
+    ./scripts/default.nix
+    { inherit config pkgs; };
 
 in
 
@@ -89,7 +87,7 @@ in
     homeDirectory = "/home/lem";
     stateVersion = "21.11";
 
-    packages = defaultPkgs ++ gitPkgs ++ polybarPkgs ++ xmonadPkgs ++ scripts;
+    packages = defaultPkgs ++ gitPkgs ++ xmonadPkgs ++ scripts;
 
     sessionVariables = {
       DISPLAY = ":0";

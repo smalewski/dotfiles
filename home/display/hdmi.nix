@@ -5,18 +5,13 @@ let
   base = pkgs.callPackage ../home.nix { inherit config lib pkgs stdenv; };
 
   #browser = pkgs.callPackage ../programs/browsers/firefox.nix {
-    #inherit config pkgs;
-    #inherit (pkgs) nur;
-    #hdmiOn = true;
-    #dpOn = false;
+  #inherit config pkgs;
+  #inherit (pkgs) nur;
+  #hdmiOn = true;
+  #dpOn = false;
   #};
 
-  hdmiBar = pkgs.callPackage ../services/polybar/bar.nix {};
-
-  myspotify = import ../programs/spotify/default.nix {
-    inherit pkgs;
-    opts = "-force-device-scale-factor=1.4 %U";
-  };
+  hdmiBar = pkgs.callPackage ../services/polybar/bar.nix { };
 
   statusBar = import ../services/polybar/default.nix {
     inherit config pkgs;
@@ -41,5 +36,5 @@ in
 
   #programs.firefox = browser.programs.firefox;
 
-  home.packages = base.home.packages ++ [ myspotify ];
+  home.packages = base.home.packages;
 }

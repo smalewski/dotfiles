@@ -2,19 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-let
-  customFonts = pkgs.nerdfonts.override {
-    fonts = [
-      "JetBrainsMono"
-      "Iosevka"
-    ];
-  };
-
-  myfonts = pkgs.callPackage fonts/default.nix { inherit pkgs; };
-
-in
 {
   imports =
     [
@@ -53,6 +42,12 @@ in
       ];
   };
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-runtime"
+  ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -75,12 +70,7 @@ in
   #extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1"; # Needed by mpd
   #};
 
-  fonts.fonts = with pkgs; [
-    customFonts
-    font-awesome
-    fira-code
-    myfonts.icomoon-feather
-  ];
+  fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
 
   users.defaultUserShell = pkgs.zsh;
   users.mutableUsers = false;
@@ -169,6 +159,12 @@ in
         theme = "half-life";
       };
     };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
+
   };
 
   nix = {

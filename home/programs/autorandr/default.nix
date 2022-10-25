@@ -14,9 +14,9 @@ in
     enable = true;
 
     hooks = {
-      predetect = {};
+      predetect = { };
 
-      preswitch = {};
+      preswitch = { };
 
       postswitch = {
         "notify-xmonad" = ''
@@ -77,17 +77,17 @@ in
             mode = "3840x2160";
             rate = "60.00";
           };
-          };
+        };
       };
 
       "home" = {
         fingerprint = {
-          DP-2-2 = t27pId;
+          DP-2-1 = t27pId;
           eDP-1 = laptopScreenId;
         };
 
         config = {
-          DP-2-2 = {
+          DP-2-1 = {
             enable = true;
             crtc = 0;
             primary = true;

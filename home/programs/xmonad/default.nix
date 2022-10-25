@@ -1,8 +1,10 @@
-{ pkgs, lib,
-  hdmiOn ? false,
-  dpOn ? false,
-  cata4kOn ? false,
-  ... }:
+{ pkgs
+, lib
+, hdmiOn ? false
+, dpOn ? false
+, cata4kOn ? false
+, ...
+}:
 
 let
   extra = ''
@@ -23,7 +25,7 @@ let
     ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2-1 --mode 1920x1080
   '';
 
-#    ${pkgs.nitrogen}/bin/nitrogen --restore &
+  #    ${pkgs.nitrogen}/bin/nitrogen --restore &
   polybarOpts = ''
     ${pkgs.pasystray}/bin/pasystray &
     ${pkgs.blueman}/bin/blueman-applet &
@@ -33,7 +35,7 @@ let
 in
 {
   xresources.properties = {
-    "Xft.dpi" = 180;
+    "Xft.dpi" = 130;
     "Xft.autohint" = 0;
     "Xft.hintstyle" = "hintfull";
     "Xft.hinting" = 1;
@@ -47,9 +49,9 @@ in
     enable = true;
 
     initExtra = extra + polybarOpts +
-                lib.optionalString hdmiOn hdmiExtra +
-                lib.optionalString dpOn dpExtra +
-                lib.optionalString cata4kOn cata4kExtra;
+      lib.optionalString hdmiOn hdmiExtra +
+      lib.optionalString dpOn dpExtra +
+      lib.optionalString cata4kOn cata4kExtra;
 
     windowManager.xmonad = {
       enable = true;

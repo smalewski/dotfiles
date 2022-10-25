@@ -41,8 +41,7 @@ let
     ; Smaller font size for shorter spaces
     font-4 = Iosevka Nerd Font:style=Medium:size=${toString font4};3
 
-    ;font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=18;0"
-    ;font-5 = "MaterialIcons:size=18;0"
+    ;font-5 = "Iosevka Nerd Font:style=Solid:pixelsize=18;0"
   '';
 
   top = ''

@@ -12,7 +12,7 @@
     green:            rgba ( 134, 175, 128, 100 % );
     background-color: rgba ( 0, 0, 0, 0 % );
     lightred:         rgba ( 204, 85, 51, 100 % );
-    font:             "JetBrainsMono Nerd Font 24";
+    font:             "Iosevka Nerd Font 24";
     tlightblack:      rgba ( 85, 68, 68, 80 % );
     lightmagenta:     rgba ( 153, 102, 0, 100 % );
     dark:             rgba ( 28, 28, 28, 100 % );
@@ -50,7 +50,7 @@ message {
     padding:          5;
     background-color: var(tcyan);
     border-color:     var(foreground);
-    font:             "JetBrainsMono Nerd Font 20";
+    font:             "Iosevka Nerd Font 20";
     border:           0px 2px 2px ;
     text-color:       var(black);
 }
@@ -58,7 +58,7 @@ inputbar {
     padding:          11px ;
     background-color: var(tlightblack);
     border:           2px ;
-    font:             "JetBrainsMono Nerd Font 30";
+    font:             "Iosevka Nerd Font 30";
     border-color:     var(foreground);
     border-radius:    15px 15px 0px 0px ;
     text-color:       var(lightgreen);
@@ -137,7 +137,7 @@ button {
     padding:          6px ;
     background-color: var(tlightblack);
     border-radius:    4px 0px 0px 4px ;
-    font:             "FontAwesome 22";
+    font:             "Iosevka 22";
     border:           2px 0px 2px 2px ;
     horizontal-align: 0.50;
     border-color:     var(foreground);
