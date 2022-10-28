@@ -1,10 +1,9 @@
-
 {
-  nix = {
-    binaryCaches = [
+  nix.settings = {
+    substituters = [
       "https://math-comp.cachix.org"
     ];
-    binaryCachePublicKeys = [
+    trusted-public-keys = [
       "math-comp.cachix.org-1:ZoAy3dSWncrBPpEsNHa1Rbio0Oly3TFrZXlVTdofbQU="
     ];
   };

@@ -7,7 +7,6 @@
 {
   imports =
     [
-      <nixos-hardware/lenovo/thinkpad/t460>
       ./hardware-configuration.nix
       ./wm/xmonad.nix
       ./cachix.nix
@@ -168,8 +167,12 @@
   };
 
   nix = {
-    trustedUsers = [ "root" "lem" ];
+    package = pkgs.nixFlakes;
+    settings = {
+      trusted-users = [ "root" "lem" ];
+    };
     extraOptions = ''
+      experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
     '';

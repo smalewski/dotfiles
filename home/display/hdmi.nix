@@ -11,14 +11,6 @@ let
   #dpOn = false;
   #};
 
-  hdmiBar = pkgs.callPackage ../services/polybar/bar.nix { };
-
-  statusBar = import ../services/polybar/default.nix {
-    inherit config pkgs;
-    mainBar = hdmiBar;
-    openCalendar = "";
-  };
-
   terminal = import ../programs/alacritty/default.nix { fontSize = 10; inherit pkgs; };
 
   wm = import ../programs/xmonad/default.nix {
@@ -29,7 +21,6 @@ in
 {
   imports = [
     ../home.nix
-    statusBar
     terminal
     wm
   ];

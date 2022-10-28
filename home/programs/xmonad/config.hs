@@ -103,11 +103,11 @@ main' dbus = xmonad . docks . ewmh . dynProjects . keybindings . urgencyHook $ d
   { terminal           = myTerminal
   , focusFollowsMouse  = False
   , clickJustFocuses   = False
-  , borderWidth        = 3
+  , borderWidth        = 2
   , modMask            = myModMask
   , workspaces         = myWS
-  , normalBorderColor  = "#dddddd" -- light gray (default)
-  , focusedBorderColor = "#1681f2" -- blue
+  , normalBorderColor  = "#c8a2c8"
+  , focusedBorderColor = "#a464a4"
   , mouseBindings      = myMouseBindings
   , layoutHook         = myLayout
   , manageHook         = myManageHook
@@ -222,8 +222,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
     [ key "Audacious"       (modm .|. controlMask,  xK_a    ) $ runScratchpadApp audacious
     , key "bottom"          (modm .|. controlMask,  xK_y    ) $ runScratchpadApp btm
     , key "Files"           (modm .|. controlMask,  xK_f    ) $ runScratchpadApp nautilus
-    , key "Screen recorder" (modm .|. controlMask,  xK_r    ) $ runScratchpadApp scr
-    , key "Spotify"         (modm .|. controlMask,  xK_s    ) $ runScratchpadApp spotify
     ] ^++^
   keySet "Screens" switchScreen ^++^
   keySet "System"
@@ -327,9 +325,9 @@ myLayout =
     . wrkLayout $ (tiled ||| Mirror tiled ||| column3 ||| full)
    where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = gapSpaced 5 $ Tall nmaster delta ratio
-     full    = gapSpaced 3 Full
-     column3 = gapSpaced 5 $ ThreeColMid 1 (3/100) (1/2)
+     tiled   = gapSpaced 2 $ Tall nmaster delta ratio
+     full    = gapSpaced 2 Full
+     column3 = gapSpaced 2 $ ThreeColMid 1 (3/100) (1/2)
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -382,15 +380,9 @@ data App
 
 audacious = ClassApp "Audacious"            "audacious"
 btm       = TitleApp "btm"                  "alacritty -t btm -e btm --color gruvbox --default_widget_type proc"
-calendar  = ClassApp "Gnome-calendar"       "gnome-calendar"
-eog       = NameApp  "eog"                  "eog"
-evince    = ClassApp "Evince"               "evince"
 gimp      = ClassApp "Gimp"                 "gimp"
 nautilus  = ClassApp "Org.gnome.Nautilus"   "nautilus"
-office    = ClassApp "libreoffice-draw"     "libreoffice-draw"
 pavuctrl  = ClassApp "Pavucontrol"          "pavucontrol"
-scr       = ClassApp "SimpleScreenRecorder" "simplescreenrecorder"
-spotify   = ClassApp "Spotify"              "myspotify"
 vlc       = ClassApp "Vlc"                  "vlc"
 yad       = ClassApp "Yad"                  "yad --text-info --text 'XMonad'"
 
@@ -409,15 +401,12 @@ myManageHook = manageApps <+> manageSpawn <+> manageScratchpads
   match :: [App] -> Query Bool
   match = anyOf . fmap isInstance
   manageApps = composeOne
-    [ isInstance calendar                      -?> doCalendarFloat
-    , match [ gimp, office ]                   -?> doFloat
+    [ match [ gimp ]                           -?> doFloat
     , match [ audacious
-            , eog
             , nautilus
             , pavuctrl
-            , scr
             ]                                  -?> doCenterFloat
-    , match [ btm, evince, spotify, vlc, yad ] -?> doFullFloat
+    , match [ btm, vlc ]                       -?> doFullFloat
     , resource =? "desktop_window"             -?> doIgnore
     , resource =? "kdesktop"                   -?> doIgnore
     , anyOf [ isBrowserDialog
@@ -446,7 +435,7 @@ scratchpadApp app = NS (getAppName app) (getAppCommand app) (isInstance app) def
 
 runScratchpadApp = namedScratchpadAction scratchpads . getAppName
 
-scratchpads = scratchpadApp <$> [ audacious, btm, nautilus, scr, spotify ]
+scratchpads = scratchpadApp <$> [ audacious, btm, nautilus ]
 
 ------------------------------------------------------------------------
 -- Workspaces
@@ -469,7 +458,7 @@ projects :: [Project]
 projects =
   [ Project { projectName      = webWs
             , projectDirectory = "~/"
-            , projectStartHook = Just $ spawn "firefox -P 'default'"
+            , projectStartHook = Just $ spawn "firefox"
             }
   , Project { projectName      = ossWs
             , projectDirectory = "~/"
@@ -485,7 +474,7 @@ projects =
             }
   , Project { projectName      = sysWs
             , projectDirectory = "~/dotfiles"
-            , projectStartHook = Just . spawn $ "code ."
+            , projectStartHook = Just . spawn $ "emacs ."
             }
   , Project { projectName      = etcWs
             , projectDirectory = "~/"

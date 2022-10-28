@@ -1,8 +1,5 @@
 { pkgs
 , lib
-, hdmiOn ? false
-, dpOn ? false
-, cata4kOn ? false
 , ...
 }:
 
@@ -13,19 +10,6 @@ let
     ${pkgs.xcape}/bin/xcape -e "Hyper_L=Tab;Hyper_R=backslash"
   '';
 
-  hdmiExtra = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-2 --mode 1920x1080 --rate 60.00
-  '';
-
-  dpExtra = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2-2 --mode 2560x1440
-  '';
-
-  cata4kExtra = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2-1 --mode 1920x1080
-  '';
-
-  #    ${pkgs.nitrogen}/bin/nitrogen --restore &
   polybarOpts = ''
     ${pkgs.pasystray}/bin/pasystray &
     ${pkgs.blueman}/bin/blueman-applet &
@@ -35,23 +19,18 @@ let
 in
 {
   xresources.properties = {
-    "Xft.dpi" = 130;
+    "Xft.dpi" = 120;
     "Xft.autohint" = 0;
     "Xft.hintstyle" = "hintfull";
     "Xft.hinting" = 1;
     "Xft.antialias" = 1;
     "Xft.rgba" = "rgb";
-    "Xcursor*theme" = "Vanilla-DMZ-AA";
-    "Xcursor*size" = 24;
   };
 
   xsession = {
     enable = true;
 
-    initExtra = extra + polybarOpts +
-      lib.optionalString hdmiOn hdmiExtra +
-      lib.optionalString dpOn dpExtra +
-      lib.optionalString cata4kOn cata4kExtra;
+    initExtra = extra + polybarOpts;
 
     windowManager.xmonad = {
       enable = true;

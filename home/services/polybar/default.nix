@@ -1,4 +1,4 @@
-{ mainBar, openCalendar, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   xdgUtils = pkgs.xdg_utils.overrideAttrs (
@@ -30,6 +30,8 @@ let
   mprisScript = pkgs.callPackage ./scripts/mpris.nix { };
   networkScript = pkgs.callPackage ./scripts/network.nix { };
 
+  mainBar = import ./bar.nix { };
+
   bctl = ''
     [module/bctl]
     type = custom/script
@@ -39,17 +41,7 @@ let
   '';
 
   cal = ''
-    [module/clickable-date]
-    inherit = module/date
-    label = %{A1:${openCalendar}:}%time%%{A}
-  '';
-
-  github = ''
-    [module/clickable-github]
-    inherit = module/github
-    token = ''${file:${config.xdg.configHome}/polybar/github-notifications-token}
-    user = gvolpe
-    label = %{A1:${openGithub}:}  %notifications%%{A}
+    [module/date]
   '';
 
   mpris = ''
@@ -72,10 +64,10 @@ let
     exec = ${pkgs.xmonad-log}/bin/xmonad-log
 
     tail = true
-    label-maxlen = 210
+    label-maxlen = 260
   '';
 
-  customMods = mainBar + bctl + cal + github + mpris + xmonad;
+  customMods = mainBar + bctl + mpris + xmonad;
 in
 {
   #xdg.configFile."polybar/github-notifications-token".source = ../../secrets/github-notifications-token;

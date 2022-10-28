@@ -1,11 +1,11 @@
-{ font0 ? 16, font1 ? 18, font2 ? 40, font3 ? 28, font4 ? 7 }:
+{ font0 ? 10, font1 ? 12, font2 ? 24, font3 ? 18, font4 ? 5 }:
 
 let
   bar = ''
     [bar/main]
     monitor = ''${env:MONITOR:DP-1}
     width = 100%
-    height = 48
+    height = 24
     radius = 6.0
     fixed-center = true
 
@@ -48,9 +48,9 @@ let
     [bar/top]
     inherit = bar/main
 
-    tray-position = center
-    modules-left = right-end-top nixos xmonad left-end-bottom right-end-top left-end-top
-    modules-right = left-end-top keyboard clickable-github temperature clickable-date battery
+    tray-position = none
+    modules-left = right-end-top xmonad
+    modules-right = left-end-top date
     enable-ipc = true
   '';
 
@@ -59,9 +59,9 @@ let
     inherit = bar/main
     bottom = true
 
-    tray-position = none
+    tray-position = right
     modules-left = right-end-bottom mpris left-end-top cpu memory filesystem
-    modules-right = left-end-bottom wired-network wireless-network pulseaudio left-end-bottom powermenu
+    modules-right = left-end-bottom wired-network wireless-network pulseaudio battery
     enable-ipc = true
   '';
 in

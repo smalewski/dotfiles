@@ -4,7 +4,7 @@
   ./dconf
   ./firefox
   ./git
-  ./neovim
   ./rofi
   ./vscode
+  ./xmonad
 ]

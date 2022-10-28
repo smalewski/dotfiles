@@ -1,10 +1,9 @@
-
 {
-  nix = {
-    binaryCaches = [
+  nix.settings = {
+    substituters = [
       "https://coq-community.cachix.org"
     ];
-    binaryCachePublicKeys = [
+    trusted-public-keys = [
       "coq-community.cachix.org-1:WBDHojv8FM6nI4ZMh43X+2g6j4WpAn+dFhjhWmLCgnA="
     ];
   };
