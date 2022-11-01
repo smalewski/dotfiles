@@ -25,12 +25,23 @@
           inherit system pkgs;
           modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-t460
-            ./system/configuration.nix
+            ./system/machines/lembook-T460/configuration.nix
+          ];
+        };
+        lembook-X1 = lib.nixosSystem {
+          inherit system pkgs;
+          modules = [
+            nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
+            ./system/machines/lembook-X1/configuration.nix
           ];
         };
       };
 
       homeConfigurations.lembook-T460 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/home.nix ];
+      };
+      homeConfigurations.lembook-X1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home/home.nix ];
       };
